@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" type="image/png" href="logo-mark.png">
+<title>WaveGuide Event Solutions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="WaveGuide Event Solutions – Veranstaltungstechnik aus StereoMike und SpotLight. Ton, Licht, Video, Bühne und Strom aus einer Hand.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: Apple-artige Produktseite, dunkle Bühne. Volle Bänder, zentrierter Inhalt (max 1120), große Display-Typo, Bento-Raster, horizontale Galerie. */
+:root{
+  color-scheme: dark;
+  --stage:#000;          /* Seitengrund, schwarz wie ein Saal mit Licht aus */
+  --video:#2b2d31;       /* exakt der Hintergrund des Fusions-Videos */
+  --panel:#141518;       /* Kacheln */
+  --panel-2:#1c1e22;
+  --line:#2a2d33;
+  --fg:#f5f5f7;
+  --fg-2:#a1a4ab;
+  --fg-3:#6c7079;
+  --wave:#4ea1ff;        /* Logo-Blau, Dark-Variante */
+  --wave-deep:#1f6fe0;
+  --display:"Archivo", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --text:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --wrap:1120px;
+  --r-lg:28px;
+  --r-md:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--stage);color:var(--fg);font-family:var(--text);font-size:17px;line-height:1.47;letter-spacing:-.01em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:rgba(0,0,0,.8)}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:calc(var(--wrap) + 32px);margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-stretch:112%;margin:0;text-wrap:balance;letter-spacing:-.02em;line-height:1.04}
+p{margin:0}
+.eyebrow{font-family:var(--display);font-stretch:118%;font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--wave)}
+.lead{font-size:clamp(19px,2.1vw,24px);line-height:1.38;color:var(--fg-2);font-weight:500;max-width:34em}
+.lead strong{color:var(--fg);font-weight:600}
+:focus-visible{outline:2px solid var(--wave);outline-offset:3px;border-radius:6px}
+
+/* Nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(0,0,0,.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav .wrap{display:flex;align-items:center;gap:28px;height:52px}
+.nav .brand img{height:24px;width:auto}
+.nav ul{display:flex;gap:26px;list-style:none;margin:0 0 0 auto;padding:0;font-size:13px}
+.nav ul a{text-decoration:none;color:#d2d2d7;transition:color .2s}
+.nav ul a:hover{color:#fff}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;background:var(--wave-deep);color:#fff;text-decoration:none;font-weight:500;font-size:13px;padding:6px 14px;border:0;cursor:pointer;font-family:var(--text);transition:background .2s}
+.pill:hover{background:#2d7ff0}
+.pill.lg{font-size:17px;padding:12px 24px}
+.link{color:var(--wave);text-decoration:none;font-size:17px}
+.link:hover{text-decoration:underline}
+.link::after{content:" ›"}
+@media (max-width:760px){.nav ul{display:none}.nav .pill{margin-left:auto}}
+
+/* Hero */
+.hero{background:var(--video);text-align:center;padding-block:56px 0;overflow:hidden}
+.hero .eyebrow{color:#c9ccd2}
+.hero h1{font-size:clamp(44px,8.4vw,104px);font-weight:800;margin-top:14px}
+.hero h1 .w{color:var(--wave)}
+.hero .lead{margin:20px auto 0;color:#c4c7cd}
+.hero .ctas{display:flex;gap:28px;justify-content:center;align-items:center;margin-top:28px;flex-wrap:wrap}
+.hero .film{position:relative;max-width:1180px;margin:36px auto 0;aspect-ratio:16/9}
+.hero .film video,.hero .film img{width:100%;height:100%;object-fit:cover}
+.hero .film::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,var(--video) 0,transparent 8%,transparent 92%,var(--video) 100%),linear-gradient(180deg,transparent 80%,var(--video))}
+.replay{position:absolute;right:16px;bottom:16px;z-index:2;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:#fff;border-radius:999px;font:500 13px var(--text);padding:7px 14px;cursor:pointer;backdrop-filter:blur(10px)}
+.replay:hover{background:rgba(255,255,255,.2)}
+
+/* Bundle statement (scroll lights words) */
+.bundle{padding-block:clamp(90px,14vw,170px)}
+.bundle h2{font-size:clamp(40px,7vw,88px);font-weight:800;line-height:1.02}
+.bundle h2 span{display:block;color:var(--fg);transition:color .5s}
+.js .bundle h2 span{color:#2e3036}
+.js .bundle h2 span.on{color:var(--fg)}
+.js .bundle h2 span.on.b{color:var(--wave)}
+.bundle .lead{margin-top:32px}
+
+/* Fusion */
+.fusion{background:var(--panel);border-block:1px solid var(--line);padding-block:clamp(80px,11vw,130px)}
+.fusion-head{text-align:center;max-width:760px;margin-inline:auto}
+.fusion-head h2{font-size:clamp(34px,5.4vw,64px);font-weight:800;margin-top:12px}
+.fusion-head .lead{margin:18px auto 0}
+.merge{display:grid;grid-template-columns:1fr auto 1fr auto 1.25fr;align-items:stretch;gap:18px;margin-top:56px}
+.merge .op{align-self:center;font-family:var(--display);font-weight:800;font-size:34px;color:var(--fg-3)}
+.co{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-md);padding:22px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.co .logo{height:120px;border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:12px}
+.co .logo img{height:100%;width:100%;object-fit:contain}
+.co .logo.spot{background:#000}
+.co .logo.stereo{background:#fff}
+.co h3{font-size:20px;font-weight:700;font-stretch:105%}
+.co p{color:var(--fg-2);font-size:15px}
+.co.wg{background:linear-gradient(160deg,#16243a,#0d1320 70%);border-color:#24406a}
+.co.wg .logo{background:transparent;padding:10px}
+@media (max-width:900px){.merge{grid-template-columns:1fr;gap:12px}.merge .op{justify-self:center;font-size:28px;line-height:1}}
+
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.fact{border-top:1px solid var(--line);padding-top:18px}
+.fact b{display:block;font-family:var(--display);font-stretch:115%;font-size:26px;font-weight:800;letter-spacing:-.01em}
+.fact span{color:var(--fg-2);font-size:15px}
+@media (max-width:700px){.facts{grid-template-columns:1fr}}
+
+/* Section heads */
+.sec{padding-block:clamp(90px,12vw,150px)}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+.sec-head h2{font-size:clamp(34px,5.4vw,64px);font-weight:800;margin-top:10px;max-width:14em}
+.sec-head .lead{max-width:24em;font-size:19px}
+
+/* Bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.tile{position:relative;border-radius:var(--r-lg);overflow:hidden;background:var(--panel);min-height:380px;display:flex;flex-direction:column;justify-content:flex-end;isolation:isolate;min-width:0}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.tile:hover img{transform:scale(1.04)}
+.tile::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.82))}
+.tile .txt{padding:28px}
+.tile h3{font-size:clamp(26px,3vw,34px);font-weight:800}
+.tile p{color:#c7c9ce;margin-top:8px;font-size:16px;max-width:30em}
+.tile .tag{font-family:var(--display);font-stretch:118%;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--wave);margin-bottom:10px}
+.t-a{grid-column:span 4;min-height:520px}
+.t-b{grid-column:span 2;min-height:520px}
+.t-c,.t-d,.t-e{grid-column:span 2}
+@media (max-width:900px){.bento{grid-template-columns:1fr 1fr}.t-a{grid-column:span 2;min-height:440px}.t-b,.t-c,.t-d,.t-e{grid-column:span 1;min-height:340px}.t-e{grid-column:span 2}}
+@media (max-width:560px){.bento{grid-template-columns:1fr}.t-a,.t-b,.t-c,.t-d,.t-e{grid-column:span 1;min-height:340px}}
+
+.demo{position:absolute;top:14px;left:14px;z-index:3;font:600 11px var(--text);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(8px);border-radius:999px;padding:4px 9px}
+.hide-demo .demo{display:none}
+
+/* Gallery */
+.gallery{background:var(--panel);border-block:1px solid var(--line)}
+.rail{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:18px;scrollbar-width:thin;scrollbar-color:#3a3d44 transparent;overscroll-behavior-x:contain}
+.rail::-webkit-scrollbar{height:6px}.rail::-webkit-scrollbar-thumb{background:#3a3d44;border-radius:6px}
+.card{flex:0 0 min(78vw,400px);scroll-snap-align:start;position:relative;border-radius:var(--r-md);overflow:hidden;background:var(--panel-2)}
+.card figure{margin:0;position:relative;aspect-ratio:4/5}
+.card figure img{width:100%;height:100%;object-fit:cover}
+.card .cap{padding:20px 22px 24px}
+.card h3{font-size:22px;font-weight:700;font-stretch:105%}
+.card p{color:var(--fg-2);font-size:15px;margin-top:6px}
+.rail-ctl{display:flex;gap:10px}
+.rail-ctl button{width:40px;height:40px;border-radius:50%;border:0;background:#2a2c31;color:var(--fg);font-size:20px;cursor:pointer;display:grid;place-items:center;transition:background .2s}
+.rail-ctl button:hover{background:#3a3d44}
+
+/* Material */
+.material .hero-img{position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:16/8}
+.material .hero-img img{width:100%;height:100%;object-fit:cover}
+.material .hero-img .over{position:absolute;inset:auto 0 0 0;padding:clamp(22px,4vw,44px);background:linear-gradient(180deg,transparent,rgba(0,0,0,.85))}
+.material .hero-img h2{font-size:clamp(30px,5vw,60px);font-weight:800}
+@media (max-width:600px){.material .hero-img{aspect-ratio:4/5}}
+.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:0 40px;margin-top:56px}
+.spec{border-top:1px solid var(--line);padding-block:22px 26px}
+.spec h3{font-size:14px;font-family:var(--text);font-weight:600;letter-spacing:0;color:var(--fg-2);text-transform:none;line-height:1.3}
+.spec ul{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:4px}
+.spec li{font-size:17px}
+@media (max-width:860px){.specs{grid-template-columns:1fr 1fr}}
+@media (max-width:540px){.specs{grid-template-columns:1fr}}
+.note{color:var(--fg-3);font-size:13px;margin-top:20px}
+
+/* Ablauf */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;counter-reset:s}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);padding:24px 22px;min-width:0}
+.step::before{counter-increment:s;content:counter(s,decimal-leading-zero);font-family:var(--display);font-stretch:120%;font-weight:800;font-size:15px;color:var(--wave);letter-spacing:.06em}
+.step h3{font-size:21px;font-weight:700;font-stretch:105%;margin-top:22px}
+.step p{color:var(--fg-2);font-size:15px;margin-top:8px}
+@media (max-width:960px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* Kontakt */
+.contact{position:relative;overflow:hidden;background:radial-gradient(120% 90% at 50% 0%,#0f2a52 0%,#050a14 55%,#000 100%);text-align:center}
+.contact .mark{width:84px;height:auto;aspect-ratio:auto;margin:0 auto 26px}
+.contact h2{font-size:clamp(40px,7vw,92px);font-weight:800}
+.contact .lead{margin:18px auto 0}
+form{max-width:640px;margin:48px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left}
+form .full{grid-column:1/-1}
+label{display:block;font-size:12px;color:var(--fg-2);margin:0 0 6px 4px;font-weight:500}
+input,select,textarea{width:100%;font:17px var(--text);color:var(--fg);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:13px 14px;transition:border-color .2s,background .2s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--wave);background:rgba(255,255,255,.09)}
+textarea{min-height:120px;resize:vertical}
+select option{background:#111}
+form .send{grid-column:1/-1;display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:8px}
+.ok{color:#8fd19e;font-size:15px}
+@media (max-width:600px){form{grid-template-columns:1fr}}
+
+/* Footer */
+footer{background:var(--panel);border-top:1px solid var(--line);font-size:12px;color:var(--fg-3);padding-block:28px 40px}
+footer .row{display:flex;gap:16px 28px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+footer a{text-decoration:none;color:var(--fg-2)}
+footer a:hover{color:var(--fg)}
+footer nav{display:flex;gap:20px;flex-wrap:wrap}
+footer img{height:20px;width:auto}
+.demo-toggle{background:none;border:1px solid var(--line);color:var(--fg-2);border-radius:999px;font:12px var(--text);padding:5px 12px;cursor:pointer}
+
+/* Reveal (nur für Elemente unterhalb des ersten Bildschirms) */
+.rv{transition:transform .9s cubic-bezier(.2,.7,.2,1),opacity .9s}
+.rv.pre{transform:translateY(28px);opacity:.001}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.rv.pre{transform:none;opacity:1}}
+</style>
+</head>
+<body>
+
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="WaveGuide Event Solutions – Start"><img src="logo-waveguide.png" alt="WaveGuide Event Solutions" width="1000" height="320"></a>
+    <ul>
+      <li><a href="#fusion">Fusion</a></li>
+      <li><a href="#leistungen">Leistungen</a></li>
+      <li><a href="#einsaetze">Einsätze</a></li>
+      <li><a href="#material">Material</a></li>
+      <li><a href="#ablauf">Ablauf</a></li>
+    </ul>
+    <a class="pill" href="#kontakt">Anfragen</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">StereoMike + SpotLight</p>
+      <h1>Aus zwei wird <span class="w">eins.</span></h1>
+      <p class="lead">WaveGuide Event Solutions. Ton, Licht, Video und Bühne aus einer Hand, von zwei Teams, die längst wissen, wie Veranstaltung geht.</p>
+      <div class="ctas">
+        <a class="pill lg" href="#kontakt">Event anfragen</a>
+        <a class="link" href="#leistungen">Leistungen ansehen</a>
+      </div>
+    </div>
+    <div class="film">
+      <video id="film" src="waveguide-fusion.mp4" poster="fusion-poster.jpg" autoplay muted playsinline preload="auto" aria-label="Animation: Die Logos von SpotLight und StereoMike verschmelzen zum WaveGuide-Logo"></video>
+      <button class="replay" id="replay" type="button">↻ Nochmal ansehen</button>
+    </div>
+  </section>
+
+  <!-- BUNDLE -->
+  <section class="bundle">
+    <div class="wrap">
+      <h2 id="bundle"><span>Erfahrung.</span><span>Know-how.</span><span>Material.</span><span class="b">Perfekt gebündelt.</span></h2>
+      <p class="lead rv">Zwei eingespielte Firmen legen zusammen, was sie über Jahre aufgebaut haben: <strong>Crew, Technik und Lager.</strong> Für euch heißt das ein Ansprechpartner, ein Angebot und ein Team, das vom ersten Plan bis zum letzten Case dabei ist.</p>
+    </div>
+  </section>
+
+  <!-- FUSION -->
+  <section class="fusion" id="fusion">
+    <div class="wrap">
+      <div class="fusion-head rv">
+        <p class="eyebrow">Die Fusion</p>
+        <h2>Zwei bekannte Namen. Ein neues Zuhause.</h2>
+        <p class="lead">StereoMike und SpotLight haben sich zusammengeschlossen. Was bleibt: die Leute, die ihr kennt. Was dazukommt: doppelt so viel Material und Know-how im Rücken.</p>
+      </div>
+
+      <div class="merge rv">
+        <article class="co">
+          <div class="logo stereo"><img src="logo-stereomike.jpg" alt="Logo StereoMike Veranstaltungstechnik" width="512" height="219"></div>
+          <h3>StereoMike Veranstaltungstechnik</h3>
+          <p>Bringt Erfahrung in Beschallung, Mischpult und Systemaufbau mit, von der Vereinsfeier bis zur großen Bühne.</p>
+        </article>
+        <div class="op" aria-hidden="true">+</div>
+        <article class="co">
+          <div class="logo spot"><img src="logo-spotlight.jpg" alt="Logo SpotLight Veranstaltungstechnik GmbH" width="224" height="224"></div>
+          <h3>SpotLight Veranstaltungstechnik GmbH</h3>
+          <p>Bringt Licht, Show und Atmosphäre mit: Programmierung, Rigging und das Auge für den richtigen Moment.</p>
+        </article>
+        <div class="op" aria-hidden="true">=</div>
+        <article class="co wg">
+          <div class="logo"><img src="logo-waveguide.png" alt="Logo WaveGuide Event Solutions" width="1000" height="320"></div>
+          <h3>WaveGuide Event Solutions</h3>
+          <p>Ein Unternehmen für Ton, Licht, Video, Bühne und Strom. Eine Planung, ein Angebot, eine Crew.</p>
+        </article>
+      </div>
+
+      <div class="facts rv">
+        <div class="fact"><b>2 Firmen. 1 Team.</b><span>Bewährte Techniker aus beiden Häusern</span></div>
+        <div class="fact"><b>1 Ansprechpartner</b><span>Von der Anfrage bis zum Abbau</span></div>
+        <div class="fact"><b>Alles aus einer Hand</b><span>Ton · Licht · Video · Bühne · Strom</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEISTUNGEN -->
+  <section class="sec" id="leistungen">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div>
+          <p class="eyebrow">Leistungen</p>
+          <h2>Alles, was ein Event zum Klingen und Leuchten bringt.</h2>
+        </div>
+        <p class="lead">Ihr bucht einzelne Gewerke oder das komplette Paket. Wir planen so, dass alles zusammenpasst.</p>
+      </div>
+
+      <div class="bento">
+        <article class="tile t-a rv">
+          <img src="konzert.jpg" alt="Demo-Bild: Konzertbühne mit blauen Lichtstrahlen" loading="lazy">
+          <span class="demo">Demo-Bild</span>
+          <div class="txt">
+            <p class="tag">Lichttechnik</p>
+            <h3>Licht, das Stimmung macht.</h3>
+            <p>Moving Heads, Wash, Beam und Effekte, programmiert für eure Show. Vom dezenten Firmenabend bis zum Festival-Headliner.</p>
+          </div>
+        </article>
+        <article class="tile t-b rv">
+          <img src="mischpult.jpg" alt="Demo-Bild: Digitales Mischpult mit Pegelanzeigen" loading="lazy">
+          <span class="demo">Demo-Bild</span>
+          <div class="txt">
+            <p class="tag">Tontechnik</p>
+            <h3>Klar bis in die letzte Reihe.</h3>
+            <p>Line-Arrays, Monitoring, Funkstrecken und digitale Pulte mit erfahrenen Tontechnikern.</p>
+          </div>
+        </article>
+        <article class="tile t-c rv">
+          <img src="led-buehne.jpg" alt="Demo-Bild: Bühne mit LED-Wand" loading="lazy">
+          <span class="demo">Demo-Bild</span>
+          <div class="txt">
+            <p class="tag">Video &amp; LED</p>
+            <h3>Bilder in groß.</h3>
+            <p>LED-Wände, Projektion, Kameras und Playback.</p>
+          </div>
+        </article>
+        <article class="tile t-d rv">
+          <img src="rigging.jpg" alt="Demo-Bild: Traverse mit Kettenzügen" loading="lazy">
+          <span class="demo">Demo-Bild</span>
+          <div class="txt">
+            <p class="tag">Bühne &amp; Rigging</p>
+            <h3>Sicher aufgehängt.</h3>
+            <p>Traversen, Kettenzüge, Bühnenpodeste. Statik inklusive.</p>
+          </div>
+        </article>
+        <article class="tile t-e rv">
+          <img src="moving-heads.jpg" alt="Demo-Bild: Reihe von Moving Heads" loading="lazy">
+          <span class="demo">Demo-Bild</span>
+          <div class="txt">
+            <p class="tag">Strom &amp; Planung</p>
+            <h3>Durchdacht von 230 V bis 125 A.</h3>
+            <p>Stromverteilung, Kabelwege und Ablaufplanung, damit am Abend alles läuft.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- EINSÄTZE -->
+  <section class="sec gallery" id="einsaetze">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div>
+          <p class="eyebrow">Einsätze</p>
+          <h2>Für jede Bühne die passende Technik.</h2>
+        </div>
+        <div class="rail-ctl">
+          <button type="button" id="prev" aria-label="Zurück">‹</button>
+          <button type="button" id="next" aria-label="Weiter">›</button>
+        </div>
+      </div>
+      <div class="rail" id="rail" tabindex="0" aria-label="Einsatzbereiche, horizontal scrollbar">
+        <article class="card">
+          <figure><img src="festival.jpg" alt="Demo-Bild: Open-Air-Bühne in der Dämmerung" loading="lazy"><span class="demo">Demo-Bild</span></figure>
+          <div class="cap"><h3>Festivals &amp; Open Air</h3><p>Komplette Bühnen inklusive Dach, PA und Lichtshow.</p></div>
+        </article>
+        <article class="card">
+          <figure><img src="konzert.jpg" alt="Demo-Bild: Konzert mit Publikum" loading="lazy"><span class="demo">Demo-Bild</span></figure>
+          <div class="cap"><h3>Konzerte &amp; Touren</h3><p>Club, Halle oder Arena, mit Crew, die Rider lesen kann.</p></div>
+        </article>
+        <article class="card">
+          <figure><img src="gala.jpg" alt="Demo-Bild: Gala mit warmem Licht und runden Tischen" loading="lazy"><span class="demo">Demo-Bild</span></figure>
+          <div class="cap"><h3>Firmenevents &amp; Galas</h3><p>Präsentationen, Preisverleihungen, Weihnachtsfeiern.</p></div>
+        </article>
+        <article class="card">
+          <figure><img src="led-buehne.jpg" alt="Demo-Bild: Showbühne mit LED-Wand" loading="lazy"><span class="demo">Demo-Bild</span></figure>
+          <div class="cap"><h3>Shows &amp; Theater</h3><p>Zuspieler, Cues und Timing, auf den Punkt programmiert.</p></div>
+        </article>
+        <article class="card">
+          <figure><img src="moving-heads.jpg" alt="Demo-Bild: Lichteffekte" loading="lazy"><span class="demo">Demo-Bild</span></figure>
+          <div class="cap"><h3>Stadt- &amp; Vereinsfeste</h3><p>Zuverlässige Technik für Zelt, Halle und Marktplatz.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATERIAL -->
+  <section class="sec material" id="material">
+    <div class="wrap">
+      <div class="hero-img rv">
+        <img src="lager.jpg" alt="Demo-Bild: Lager mit gestapelten Flightcases" loading="lazy">
+        <span class="demo">Demo-Bild</span>
+        <div class="over">
+          <p class="eyebrow">Material</p>
+          <h2>Zwei Lager. Ein Bestand.</h2>
+        </div>
+      </div>
+      <div class="specs">
+        <div class="spec rv"><h3>Beschallung</h3><ul><li>Line-Array-Systeme</li><li>Subwoofer &amp; Fill-Systeme</li><li>Bühnenmonitoring &amp; In-Ear</li></ul></div>
+        <div class="spec rv"><h3>Regie</h3><ul><li>Digitale Mischpulte</li><li>Stageboxen &amp; Netzwerk</li><li>Funkmikrofone</li></ul></div>
+        <div class="spec rv"><h3>Licht</h3><ul><li>Moving Heads (Spot, Wash, Beam)</li><li>LED-Scheinwerfer &amp; Blinder</li><li>Lichtpulte &amp; Hazer</li></ul></div>
+        <div class="spec rv"><h3>Video</h3><ul><li>LED-Wände</li><li>Projektoren &amp; Leinwände</li><li>Zuspielung &amp; Show-Control</li></ul></div>
+        <div class="spec rv"><h3>Bühne &amp; Rigging</h3><ul><li>Traversen-Systeme</li><li>Kettenzüge</li><li>Bühnenpodeste</li></ul></div>
+        <div class="spec rv"><h3>Strom</h3><ul><li>Stromverteiler bis 125 A</li><li>Kabelbrücken &amp; Verlängerungen</li><li>Ausrüstung für Außeneinsätze</li></ul></div>
+      </div>
+      <p class="note">Komplette Materialliste auf Anfrage.</p>
+    </div>
+  </section>
+
+  <!-- ABLAUF -->
+  <section class="sec" id="ablauf" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div>
+          <p class="eyebrow">Ablauf</p>
+          <h2>So läuft's mit uns.</h2>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step rv"><h3>Anfrage</h3><p>Ihr erzählt uns von Location, Datum und Idee.</p></div>
+        <div class="step rv"><h3>Planung</h3><p>Wir planen Technik, Strom und Zeitplan und schicken ein Angebot.</p></div>
+        <div class="step rv"><h3>Aufbau</h3><p>Unsere Crew baut auf, richtet ein und testet alles.</p></div>
+        <div class="step rv"><h3>Show</h3><p>Techniker an Ton und Licht sind den ganzen Abend vor Ort.</p></div>
+        <div class="step rv"><h3>Abbau</h3><p>Wir räumen auf und hinterlassen die Location wie vorgefunden.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section class="sec contact" id="kontakt">
+    <div class="wrap">
+      <img class="mark rv" src="logo-mark.png" alt="" width="320" height="320">
+      <h2 class="rv">Euer Event. Unsere Welle.</h2>
+      <p class="lead rv">Schreibt uns, was ihr vorhabt. Wir melden uns mit einem Vorschlag.</p>
+      <form id="form" class="rv" novalidate>
+        <div><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required></div>
+        <div><label for="f-mail">E-Mail</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
+        <div><label for="f-date">Datum der Veranstaltung</label><input id="f-date" name="date" type="date"></div>
+        <div><label for="f-type">Art der Veranstaltung</label>
+          <select id="f-type" name="type">
+            <option>Konzert / Festival</option><option>Firmenevent / Gala</option><option>Show / Theater</option><option>Stadt- / Vereinsfest</option><option>Sonstiges</option>
+          </select></div>
+        <div class="full"><label for="f-msg">Was habt ihr vor?</label><textarea id="f-msg" name="msg" placeholder="Location, Gästezahl, gewünschte Technik …"></textarea></div>
+        <div class="send"><button class="pill lg" type="submit">Anfrage senden</button><span class="ok" id="ok" role="status" aria-live="polite"></span></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <img src="logo-waveguide.png" alt="WaveGuide Event Solutions" width="1000" height="320">
+    <nav><a href="#top">Impressum</a><a href="#top">Datenschutz</a><a href="#kontakt">Kontakt</a></nav>
+    <span>© 2026 WaveGuide Event Solutions</span>
+    <button class="demo-toggle" id="demoToggle" type="button">Demo-Hinweise ausblenden</button>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+
+// Video: einmal abspielen, Button zum Wiederholen
+const v=document.getElementById('film'), rp=document.getElementById('replay');
+rp.addEventListener('click',()=>{try{v.currentTime=0;v.play().catch(()=>{})}catch(e){}});
+
+// Wörter "Erfahrung. Know-how. Material." beim Scrollen aufleuchten lassen
+const words=[...document.querySelectorAll('#bundle span')];
+function lightWords(){
+  const vh=innerHeight;
+  words.forEach(w=>{const r=w.getBoundingClientRect();w.classList.toggle('on',r.top<vh*0.72)});
+}
+addEventListener('scroll',lightWords,{passive:true});addEventListener('resize',lightWords);lightWords();
+
+// Reveal nur für Elemente, die beim Laden unterhalb des Bildschirms liegen
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.rv').forEach(el=>{if(el.getBoundingClientRect().top>innerHeight){el.classList.add('pre');io.observe(el)}});
+}
+
+// Galerie-Pfeile
+const rail=document.getElementById('rail');
+const step=()=>{const c=rail.querySelector('.card');return c?c.getBoundingClientRect().width+18:300};
+document.getElementById('prev').onclick=()=>rail.scrollBy({left:-step(),behavior:'smooth'});
+document.getElementById('next').onclick=()=>rail.scrollBy({left:step(),behavior:'smooth'});
+
+// Formular (Demo, sendet noch nicht)
+document.getElementById('form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const ok=document.getElementById('ok'), f=e.target;
+  if(!f['f-name'].value.trim()||!/^\S+@\S+\.\S+$/.test(f['f-mail'].value)){ok.style.color='#ff8a7a';ok.textContent='Bitte Name und gültige E-Mail angeben.';return}
+  ok.style.color='';ok.textContent='Danke! (Demo: Das Formular wird noch an keine Adresse geschickt.)';
+});
+
+// Demo-Hinweise ein/aus
+const dt=document.getElementById('demoToggle');
+dt.onclick=()=>{const h=document.body.classList.toggle('hide-demo');dt.textContent=h?'Demo-Hinweise einblenden':'Demo-Hinweise ausblenden'};
+</script>
+
+</body>
+</html>
